@@ -5,9 +5,10 @@ namespace LittleGiant\SilverStripeImagePoints\DataObjects;
 use LittleGiant\SilverStripeImagePoints\Forms\EditableDataObject;
 use LittleGiant\SilverStripeImagePoints\Forms\PointField;
 use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ORM\FieldType\DBInt;
 use SilverStripe\ORM\FieldType\DBText;
 use SilverStripe\ORM\FieldType\DBVarchar;
@@ -42,7 +43,7 @@ class Point extends DataObject
      */
     private static $db = [
         'Title'    => DBVarchar::class,
-        'Content'  => DBText::class,
+        'Content'  => DBHTMLText::class,
         'Position' => DBVarchar::class,
         'Sort'     => DBInt::class,
     ];
@@ -125,7 +126,7 @@ class Point extends DataObject
         $imageHeight = $this->config()->image_height;
 
         $fields->addFieldsToTab('Root.Main', [
-            TextareaField::create('Content', 'Content')
+            HTMLEditorField::create('Content', 'Content')
                 ->setRows(2),
             PointField::create(
                 'Position',
